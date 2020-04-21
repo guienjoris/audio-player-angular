@@ -1,26 +1,32 @@
 <h1>{{title}}</h1>
-<input type="file" name="playlist" (change)="select($event)" multiple accept="audio/*">
-<button (click)="play()">Play</button>
-<div>
-  <ol>
+<div class="block">
+  <input type="file" name="playlist" (change)="select($event)" multiple accept="audio/*">
+  <button (click)="play()" [disabled]=" playlistBrut[0] === undefined">Envoyer vers le lecteur</button>
+  <button (click)="deletePlaylist()" [disabled]="playlistBrut[0] === undefined">Effacer la Playlist</button>
+</div>
+
+<div class="block">
+  <ul>
     Elements sélectionnés
-    <li *ngFor="let item of playlistBrut">
+    <li *ngFor="let item of playlistFinal; let i=index">
       <p>{{item.name}}</p>
     </li>
-  </ol>
+  </ul>
 </div>
-<div>
-  <ol>
+<div class="block">
+  <ul>
     Liste de lecture
     <li *ngFor="let music of playlistDisplay; let i = index">
       <p (dblclick)="selectMusik(i)">{{music.name}}</p>
     </li>
-  </ol>
+  </ul>
 </div>
-<p>Actuellement écouté: </p>
-<p>{{musicPlaying}}</p>
-<div>
-  <audio [src]="srcMusic | safeResourceUrl " autoplay controls>Your browser does not support the
-    <code>audio</code> element.</audio>
+<div class="block">
+  <p>Actuellement écouté: </p>
+  <p>{{musicPlaying}}</p>
+    <div>
+      <audio [src]="srcMusic | safeResourceUrl " autoplay controls>Your browser does not support the
+        <code>audio</code> element.</audio>
+    </div>
 </div>
 <router-outlet></router-outlet>

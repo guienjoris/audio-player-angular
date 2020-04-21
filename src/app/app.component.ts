@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
   playlistBrut: any[]=[];
   files : any[] = [];
   playlistFinal: any[]= [];
-  playlistDisplay: any [] = []
   srcMusic: string;
   musicPlaying: string;
+  playlistDisplay: any[]= [];
 
   constructor( private sanitizer : DomSanitizer){}
   ngOnInit(){
@@ -22,33 +22,29 @@ export class AppComponent implements OnInit {
   
   select(event:any){
     this.playlistBrut.push(Array.prototype.slice.call(event.target.files));
-    // if(this.playlistBrut.length >1){
-    //   this.playlistFinal = this.playlistBrut[0].concat(this.playlistBrut[1])
-    // }else{
-    //   this.playlistFinal= this.playlistBrut[0];
-    // }
+    this.playlistFinal = [].concat(...this.playlistBrut)
     console.log(this.playlistBrut)
   }
   
   play(){
     let i:number;
-
-    if(this.playlistBrut.length >1){
-        this.playlistFinal = this.playlistBrut[0].concat(this.playlistBrut[1])
-      }else{
-        this.playlistFinal= this.playlistBrut[0];
-      }
     for(i=0;i< this.playlistFinal.length;i++){
       this.files.push(URL.createObjectURL(this.playlistFinal[i]));
-      
     }
     this.playlistDisplay = this.playlistFinal;
     console.log(this.playlistFinal)
   }
   selectMusik(index:any){
-    this.musicPlaying= this.playlistDisplay[index].name;
+    this.musicPlaying= this.playlistFinal[index].name;
     this.srcMusic = this.files[index];
     console.log(this.srcMusic,this.musicPlaying)
+  }
+  deletePlaylist(){
+    this.playlistBrut = [];
+    this.playlistFinal= [];
+    this.musicPlaying= "";
+    this.files = [];
+    console.log(this.files,this.playlistBrut,this.playlistFinal,this.musicPlaying);
   }
 }
 

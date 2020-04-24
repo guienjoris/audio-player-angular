@@ -9,4 +9,24 @@ h1{
     audio{
         width:30%;
     }
+    span{
+        font-size:100%;
+        border:1px solid black;
+        border-radius:20%;
+        padding:0.1%;
+        margin-left:5%;
+        &:hover{
+            background-color: red;
+            cursor:pointer;
+        }
+    }
+}
+.playlist{
+    height:200px;
+    overflow:scroll;
+    overflow-x: hidden;
+    width:30%;
+    margin-left:50%;
+    transform: translate(-50%);
+    border: 1px solid black;
 }

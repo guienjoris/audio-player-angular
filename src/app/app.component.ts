@@ -31,17 +31,25 @@ export class AppComponent implements OnInit {
     for(i=0;i< this.playlistFinal.length;i++){
       this.files.push(URL.createObjectURL(this.playlistFinal[i]));
     }
+    this.playlistBrut =[];
     this.playlistDisplay = this.playlistFinal;
+    this.playlistFinal =[];
     console.log(this.playlistFinal)
   }
+  delete(index:number){
+    this.playlistBrut.splice(index,1);
+    this.playlistFinal.splice(index,1);
+
+  }
   selectMusik(index:any){
-    this.musicPlaying= this.playlistFinal[index].name;
+    this.musicPlaying= this.playlistDisplay[index].name;
     this.srcMusic = this.files[index];
     console.log(this.srcMusic,this.musicPlaying)
   }
   deletePlaylist(){
     this.playlistBrut = [];
     this.playlistFinal= [];
+    this.playlistDisplay = [];
     this.musicPlaying= "";
     this.files = [];
     console.log(this.files,this.playlistBrut,this.playlistFinal,this.musicPlaying);

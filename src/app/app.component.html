@@ -1,27 +1,26 @@
 <h1>{{title}}</h1>
 <div class="block">
   <input type="file" name="playlist" (change)="select($event)" multiple accept="audio/*">
-  <button (click)="play()" [disabled]=" playlistBrut[0] === undefined">Envoyer vers le lecteur</button>
-  <button (click)="deletePlaylist()" [disabled]="playlistBrut[0] === undefined">Effacer la Playlist</button>
+  <button (click)="play()" [disabled]=" playlistBrut[0] === undefined || playlistDisplay[0] !== undefined">Envoyer vers le lecteur</button>
+  <button (click)="deletePlaylist()" [disabled]="playlistDisplay[0] === undefined">Effacer la Playlist</button>
 </div>
-
-<div class="block">
+<span>Elements sélectionnés</span>
+<div class="block playlist">
   <ul>
-    Elements sélectionnés
     <li *ngFor="let item of playlistFinal; let i=index">
-      <p>{{item.name}}</p>
+      <p>{{item.name}}<span (click)="delete(i)">X</span></p>
     </li>
   </ul>
 </div>
-<div class="block">
+<span>Liste de lecture</span>
+<div class="block playlist">
   <ul>
-    Liste de lecture
     <li *ngFor="let music of playlistDisplay; let i = index">
-      <p (dblclick)="selectMusik(i)">{{music.name}}</p>
+      <p (dblclick)="selectMusik(i)">{{music.name}} </p>
     </li>
   </ul>
 </div>
-<div class="block">
+<div class="block currentMusik">
   <p>Actuellement écouté: </p>
   <p>{{musicPlaying}}</p>
     <div>
